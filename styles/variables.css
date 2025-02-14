@@ -1,0 +1,49 @@
+:root {
+    /* Core Colors - Black & White Scale */
+    --black-100: #000000;
+    --black-90: #121212;
+    --black-80: #1A1A1A;
+    --black-70: #333333;
+    
+    --white-100: #FFFFFF;
+    --white-90: #F5F5F5;
+    --white-80: #EEEEEE;
+    --white-70: #CCCCCC;
+
+     /* Jinsoul Blue */
+  --blue-primary: #0801D5;
+  --blue-light: #2421E5;  /* Lighter version for hover states */
+  --blue-dark: #0601A8;   /* Darker version for active states */
+
+  
+    /* UI Colors */
+    --background: var(--black-100);
+    --surface: var(--black-90);
+    --surface-alt: var(--black-80);
+    
+    --text-primary: var(--white-100);
+    --text-secondary: var(--white-70);
+    --text-disabled: var(--white-70);
+  
+    /* Spacing Scale (in rems) */
+    --space-1: 0.25rem;  /* 4px */
+    --space-2: 0.5rem;   /* 8px */
+    --space-3: 1rem;     /* 16px */
+    --space-4: 1.5rem;   /* 24px */
+    --space-5: 2rem;     /* 32px */
+    --space-6: 3rem;     /* 48px */
+  
+    /* Layout */
+    --container-width: 1200px;
+    --header-height: 72px;
+    --border-radius: 8px;
+  
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 300ms ease;
+  }
+  
+  /* Later we can add member theme variables like:
+  :root[data-theme="member-1"] {
+    --accent: #FF0000;
+  } */
