@@ -11,9 +11,9 @@
     --white-70: #CCCCCC;
 
      /* Jinsoul Blue */
-  --blue-primary: #0801D5;
-  --blue-light: #2421E5;  /* Lighter version for hover states */
-  --blue-dark: #0601A8;   /* Darker version for active states */
+    --blue-primary: #0801D5;
+    --blue-light: #2421E5;  /* Lighter version for hover states */
+    --blue-dark: #0601A8;   /* Darker version for active states */
 
   
     /* UI Colors */
@@ -25,6 +25,22 @@
     --text-secondary: var(--white-70);
     --text-disabled: var(--white-70);
   
+
+    /* Typography */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Font Sizes */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 2rem;      /* 32px */
+    --text-4xl: 2.5rem;    /* 40px */
+    --text-logo: 3.5rem;   /* 56px */
     /* Spacing Scale (in rems) */
     --space-1: 0.25rem;  /* 4px */
     --space-2: 0.5rem;   /* 8px */
