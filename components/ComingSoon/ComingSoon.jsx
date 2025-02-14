@@ -14,7 +14,6 @@ export default function ComingSoon() {
         />
         <h1 className={styles.heading}>lunar.gallery</h1>
       </div>
-      <p className={styles.tagline}>see more. own more.</p>
       <h1 className={styles.message}>coming soon.</h1>
     </main>
   );
