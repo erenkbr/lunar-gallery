@@ -1,0 +1,198 @@
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--background);
+    z-index: 100;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-heading), sans-serif;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  
+  .links {
+    display: flex;
+    gap: var(--space-4);
+  }
+  
+  .iconLink, .iconButton {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    color: var(--text-primary);
+    transition: color var(--transition-fast);
+  }
+  
+  .iconLink:hover, .iconButton:hover {
+    color: var(--blue-primary);
+  }
+  
+  .menuButton {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      padding: var(--space-3) var(--space-4);
+    }
+  
+    .logo {
+      justify-content: flex-start;
+    }
+  
+    .links {
+      display: none;
+    }
+  
+    .menuButton {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background: var(--surface-alt);
+    padding: var(--space-5);
+    border-radius: var(--border-radius);
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .modal h2 {
+    font-family: var(--font-heading), sans-serif;
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+  }
+  
+  .input {
+    width: 100%;
+    padding: var(--space-2);
+    font-size: var(--text-base);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--text-secondary);
+    background: var(--background);
+    color: var(--text-primary);
+  }
+  
+  .modalButtons {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+  
+  .submitBtn {
+    background: var(--blue-primary);
+    color: var(--text-primary);
+    border: none;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-base);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+  }
+  
+  .submitBtn:hover {
+    background: var(--blue-light);
+  }
+  
+  .closeBtn {
+    background: var(--surface);
+    color: var(--text-primary);
+    border: none;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-base);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+  }
+  
+  .closeBtn:hover {
+    background: var(--text-secondary);
+  }
+
+.instructions {
+    margin-top: var(--space-4);
+    text-align: left;
+    padding: var(--space-3);
+    border-left: 2px solid var(--blue-primary);
+  }
+  
+  .instructions h3 {
+    font-family: var(--font-heading), sans-serif;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+  
+  .instructions ol {
+    font-family: var(--font-body), sans-serif;
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: step-counter;
+  }
+  
+  .instructions li {
+    position: relative;
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-4);
+    line-height: 1.5;
+  }
+  
+  .instructions li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    background: var(--blue-primary);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  

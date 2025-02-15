@@ -1,0 +1,61 @@
+.filterContainer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--surface-alt);
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    margin-top: var(--header-height);
+  }
+  
+  .artmsText {
+    font-family: var(--font-heading), sans-serif;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  
+  
+  .memberList {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .filterButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .filterButton:hover {
+    transform: scale(1.05);
+  }
+  
+  .filterButton.selected {
+    box-shadow: 0 0 0 2px var(--blue-primary);
+  }
+  
+  .logo {
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .memberAvatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 45px;
+    height: 45px;
+  }
