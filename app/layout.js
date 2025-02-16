@@ -1,9 +1,20 @@
-import './globals.css';
+"use client";
+
+import "./globals.css";
+import Navbar from "@/app/components/Navbar/Navbar";
+import { Providers } from "./providers";
+import { MemberFilter } from "./components/MemberFilter/MemberFilter";
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
