@@ -26,7 +26,53 @@
     display: flex;
     gap: var(--space-4);
   }
-  
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .searchInput {
+    width: 0;
+    padding: 5px 0;
+    font-size: var(--text-base);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    background: var(--background);
+    color: var(--text-primary);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: width 0.4s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s;
+  }
+
+  .searchActive .searchInput {
+    width: 180px;  /* Expands when active */
+    padding: var(--space-2);
+    opacity: 1;
+    border: 1px solid var(--text-secondary);
+    transform: scaleX(1);
+  }
+
+  /* Search Icon Animation */
+  .iconButton {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    color: var(--text-primary);
+    transition: transform 0.2s ease-in-out, color var(--transition-fast);
+    cursor: pointer;
+  }
+
+  /* Slight scale effect on hover */
+  .iconButton:hover {
+    color: var(--blue-primary);
+    transform: scale(1.1);
+  }
+
   .iconLink, .iconButton {
     background: transparent;
     border: none;
@@ -48,8 +94,8 @@
     border: none;
     color: var(--text-primary);
     cursor: pointer;
-  }
-  
+  } 
+
   @media (max-width: 768px) {
     .navbar {
       padding: var(--space-3) var(--space-4);

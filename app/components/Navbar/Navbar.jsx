@@ -2,7 +2,7 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, searchRef} from "react";
 import { Search, Folder, Wallet, Menu, X, LogOut} from "lucide-react";
 import { useObjekts } from "@/app/hooks/useObjekts";
 import { useWalletStore } from "@/app/store/useWalletStore";
@@ -11,10 +11,35 @@ export default function Navbar() {
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [inputAddress, setInputAddress] = useState("");
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+
+
   
   const { walletAddress, setWalletAddress, clearWallet } = useWalletStore();
   
   const { refetch, isLoading } = useObjekts(walletAddress);
+
+  const handleSearchSubmit = () => {
+    if (searchQuery.trim() !== "") {
+      window.location.href = `/search?query=${encodeURIComponent(searchQuery)}`;
+      setSearchOpen(false);
+      setSearchQuery("");
+    }
+  };
+
+  // Close search when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setSearchOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleWalletSubmit = async () => {
     if (inputAddress) {
@@ -36,11 +61,27 @@ export default function Navbar() {
           <Image src="/moon-logo.svg" alt="Lunar Gallery" width={40} height={40} />
           <span>lunar.gallery</span>
         </Link>
-        
+
         <div className={styles.links}>
-          <Link href="/explore" className={styles.iconLink}>
-            <Search size={24} />
-          </Link>
+          
+
+        <div className={`${styles.searchContainer} ${searchOpen ? styles.searchActive : ""}`} ref={searchRef}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search users..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
+              style={{ display: searchOpen ? "block" : "none" }}
+            />
+            <button className={styles.iconButton} onClick={() => setSearchOpen(!searchOpen)}>
+              <Search size={24} />
+            </button>
+          </div>
+        
+
+
           <Link href="/collection" className={styles.iconLink}>
             <Folder size={24} />
           </Link>
@@ -70,7 +111,7 @@ export default function Navbar() {
 
         {menuOpen && (
           <div className={styles.mobileMenu}>
-            <Link href="/explore" onClick={() => setMenuOpen(false)}>
+            <Link href="/explore" onClick={() => setMenuOpen(true)}>
               Explore
             </Link>
             <Link href="/collection" onClick={() => setMenuOpen(false)}>
