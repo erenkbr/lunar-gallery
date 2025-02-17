@@ -3,7 +3,7 @@ import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Search, Folder, Wallet, Menu, X } from "lucide-react";
+import { Search, Folder, Wallet, Menu, X, LogOut} from "lucide-react";
 import { useObjekts } from "@/app/hooks/useObjekts";
 import { useWalletStore } from "@/app/store/useWalletStore";
 
@@ -54,7 +54,10 @@ export default function Navbar() {
               }
             }}
           >
-            <Wallet size={24} />
+            
+           { walletAddress ? <LogOut  size={24} /> :  <Wallet size={24} />}
+      
+        
           </button>
         </div>
 
