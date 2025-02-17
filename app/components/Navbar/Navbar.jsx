@@ -6,27 +6,27 @@ import { useState } from "react";
 import { Search, Folder, Wallet, Menu, X, LogOut} from "lucide-react";
 import { useObjekts } from "@/app/hooks/useObjekts";
 import { useWalletStore } from "@/app/store/useWalletStore";
+import { useAuth } from "@/app/hooks/useAuth";
 
 export default function Navbar() {
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [inputAddress, setInputAddress] = useState("");
   
-  const { walletAddress, setWalletAddress, clearWallet } = useWalletStore();
+  const [emailAddress, setEmailAddress] = useState("");
   
-  const { refetch, isLoading } = useObjekts(walletAddress);
-
-  const handleWalletSubmit = async () => {
-    if (inputAddress) {
-      setWalletAddress(inputAddress);
-      await refetch();
-      setWalletModalOpen(false);
-      setInputAddress("");
+  const { sendMagicLink  } = useAuth(emailAddress);
+  
+  const handleEmailSubmit = async (e) => {
+    
+    if (emailAddress) {
+      try {
+        await sendMagicLink(emailAddress);
+        setWalletModalOpen(false);
+        setEmailAddress("");
+      } catch (error) {
+        console.error('Failed to send magic link:', error);
+      }
     }
-  };
-
-  const handleDisconnect = () => {
-    clearWallet();
   };
 
   return (
@@ -36,7 +36,7 @@ export default function Navbar() {
           <Image src="/moon-logo.svg" alt="Lunar Gallery" width={40} height={40} />
           <span>lunar.gallery</span>
         </Link>
-        
+
         <div className={styles.links}>
           <Link href="/explore" className={styles.iconLink}>
             <Search size={24} />
@@ -47,8 +47,8 @@ export default function Navbar() {
           <button 
             className={styles.iconButton} 
             onClick={() => {
-              if (walletAddress) {
-                handleDisconnect();
+              if (emailAddress) {
+                () => {};
               } else {
                 setWalletModalOpen(true);
               }
@@ -79,8 +79,8 @@ export default function Navbar() {
             <button 
               className={styles.mobileConnectBtn}
               onClick={() => {
-                if (walletAddress) {
-                  handleDisconnect();
+                if (emailAddress) {
+                  () => {};
                 } else {
                   setWalletModalOpen(true);
                 }
@@ -88,7 +88,6 @@ export default function Navbar() {
               }}
             >
               <Wallet size={20} /> 
-              {walletAddress ? 'Disconnect Wallet' : 'Connect Wallet'}
             </button>
           </div>
         )}
@@ -103,29 +102,21 @@ export default function Navbar() {
             className={styles.modal} 
             onClick={(e) => e.stopPropagation()}
           >
-            <h2>Enter Wallet Address</h2>
+            <h2>Enter Your cosmo E-mail</h2>
             <input
               type="text"
               placeholder="0x1234..."
-              value={inputAddress}
-              onChange={(e) => setInputAddress(e.target.value)}
+              value={emailAddress}
+              onChange={(e) => setEmailAddress(e.target.value)}
               className={styles.input}
             />
-            <div className={styles.instructions}>
-              <h3>How to Find Your Wallet Address</h3>
-              <ol>
-                <li>Open the <strong>Cosmo</strong> app and press the <strong>Activity</strong> tab.</li>
-                <li>Press on your <strong>profile icon</strong> and select <strong>Copy Address</strong>.</li>
-              </ol>
-            </div>
-            <div className={styles.modalButtons}>
-              <button 
-                onClick={handleWalletSubmit}
-                disabled={isLoading}
+            <button 
+                onClick={handleEmailSubmit}
                 className={styles.submitBtn}
-              >
-                {isLoading ? 'Loading...' : 'Submit'}
+            >
+              Submit
               </button>
+            <div className={styles.modalButtons}>
               <button 
                 onClick={() => setWalletModalOpen(false)} 
                 className={styles.closeBtn}
