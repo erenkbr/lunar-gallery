@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Search, Folder, Wallet, Menu, X, LogOut} from "lucide-react";
-import { useObjekts } from "@/app/hooks/useObjekts";
-import { useWalletStore } from "@/app/store/useWalletStore";
 import { useAuth } from "@/app/hooks/useAuth";
 
 export default function Navbar() {
@@ -14,7 +12,8 @@ export default function Navbar() {
   
   const [emailAddress, setEmailAddress] = useState("");
   
-  const { sendMagicLink  } = useAuth(emailAddress);
+  const { sendMagicLink, isLoggedIn, logout } = useAuth(emailAddress);
+
   
   const handleEmailSubmit = async (e) => {
     
@@ -47,15 +46,15 @@ export default function Navbar() {
           <button 
             className={styles.iconButton} 
             onClick={() => {
-              if (emailAddress) {
-                () => {};
+              if (isLoggedIn) {
+                logout();
               } else {
                 setWalletModalOpen(true);
               }
             }}
           >
             
-           { walletAddress ? <LogOut  size={24} /> :  <Wallet size={24} />}
+           { isLoggedIn ? <LogOut  size={24} /> : <Wallet size={24} />}
       
         
           </button>
@@ -79,8 +78,8 @@ export default function Navbar() {
             <button 
               className={styles.mobileConnectBtn}
               onClick={() => {
-                if (emailAddress) {
-                  () => {};
+                if (isLoggedIn) {
+                  logout();
                 } else {
                   setWalletModalOpen(true);
                 }
