@@ -7,13 +7,19 @@ import styles from './MemberFilter.module.css';
 export function MemberFilter() {
   const { selectedFilter, setSelectedFilter } = useObjektsStore();
 
+  const handleGroupTitleClick = () => {
+    setSelectedFilter(''); // Reset to show all objekts (no filter)
+  };
+
   return (
     <div className={styles.filterContainer}>
       <div className={styles.groupSection}>
-        <span className={styles.groupTitle}>Members</span>
-
-        <div className={styles.groupContainer}>
-          <span className={styles.groupLabel}>ARTMS</span>
+        <span 
+          role='button'
+          onClick={() => handleGroupTitleClick()}
+          className={styles.groupTitle}>
+            ARTMS
+          </span>
           <div className={styles.memberList}>
             {ARTMS_MEMBERS.map((member) => (
               <button
@@ -34,9 +40,9 @@ export function MemberFilter() {
               </button>
             ))}
           </div>
-        </div>
 
-        <div className={styles.groupContainer}>
+
+        {/* <div className={styles.groupContainer}>
           <span className={styles.groupLabel}>tripleS</span>
           <div className={styles.memberList}>
             {TRIPLES_MEMBERS.map((member) => (
@@ -58,7 +64,7 @@ export function MemberFilter() {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

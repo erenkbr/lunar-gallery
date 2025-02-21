@@ -1,65 +1,60 @@
 :root {
-    /* Core Colors - Black & White Scale */
-    --black-100: #000000;
-    --black-90: #121212;
-    --black-80: #1A1A1A;
-    --black-70: #333333;
-    
-    --white-100: #FFFFFF;
-    --white-90: #F5F5F5;
-    --white-80: #EEEEEE;
-    --white-70: #CCCCCC;
+  --black-100: #0F0F1A; /* Deep space black */
+  --black-90: #1F1F2F;  /* Lunar mist, midtone gray-black */
+  --black-80: #2F2F3F;  /* Very light neutral black for secondary */
+  --black-70: #333333;  /* Neutral gray for shadows */
+  
+  --white-100: #FFFFFF;
+  --white-90: #F5F5F5;
+  --white-80: #EEEEEE;
+  --white-70: #CCCCCC;
 
-     /* Jinsoul Blue */
-    --blue-primary: #0801D5;
-    --blue-light: #2421E5;  /* Lighter version for hover states */
-    --blue-dark: #0601A8;   /* Darker version for active states */
+  /* Lunar/Cosmic Colors (Modern, No Silver/Purple) */
+  --cta-primary: #1E4E79; /* Deep, professional blue for CTAs, replacing silver */
+  --cta-primary-hover: #2E6E9A; /* Lighter blue on hover for depth */
+  --neutral-secondary: #2F2F3F; /* Very light neutral black for secondary actions */
+  --neutral-secondary-hover: #1F1F2F; /* Slightly darker gray-black on hover */
+  --soft-accent-blue: #1E4E79; /* Celestial blue for accents, same as CTA */
+  --cosmic-gradient: linear-gradient(135deg, #0F0F1A, #1F1F2F); /* Subtle black-to-gray gradient */
 
-  
-    /* UI Colors */
-    --background: var(--black-100);
-    --surface: var(--black-90);
-    --surface-alt: var(--black-80);
-    
-    --text-primary: var(--white-100);
-    --text-secondary: var(--white-70);
-    --text-disabled: var(--white-70);
-  
+  --background: var(--black-100);
+  --surface: var(--black-90); /* Midtone gray-black for surfaces */
+  --surface-alt: var(--black-80); /* Light neutral black, no purple/silver */
 
-    /* Typography */
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+  --text-primary: var(--white-100);
+  --text-secondary: #7A7A8A; /* Soft gray for secondary text */
+  --text-disabled: #666666; /* Darker gray for disabled states */
 
-    /* Font Sizes */
-    --text-xs: 0.75rem;    /* 12px */
-    --text-sm: 0.875rem;   /* 14px */
-    --text-base: 1rem;     /* 16px */
-    --text-lg: 1.125rem;   /* 18px */
-    --text-xl: 1.25rem;    /* 20px */
-    --text-2xl: 1.5rem;    /* 24px */
-    --text-3xl: 2rem;      /* 32px */
-    --text-4xl: 2.5rem;    /* 40px */
-    --text-logo: 3.5rem;   /* 56px */
-    /* Spacing Scale (in rems) */
-    --space-1: 0.25rem;  /* 4px */
-    --space-2: 0.5rem;   /* 8px */
-    --space-3: 1rem;     /* 16px */
-    --space-4: 1.5rem;   /* 24px */
-    --space-5: 2rem;     /* 32px */
-    --space-6: 3rem;     /* 48px */
-  
-    /* Layout */
-    --container-width: 1200px;
-    --header-height: 72px;
-    --border-radius: 8px;
-  
-    /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-normal: 300ms ease;
-  }
-  
-  /* Later we can add member theme variables like:
-  :root[data-theme="member-1"] {
-    --accent: #FF0000;
-  } */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 2rem;      /* 32px */
+  --text-4xl: 2.5rem;    /* 40px */
+  --text-logo: 3.5rem;   /* 56px */
+
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 1rem;     /* 16px */
+  --space-4: 1.5rem;   /* 24px */
+  --space-5: 2rem;     /* 32px */
+  --space-6: 3rem;     /* 48px */
+
+  --container-width: 1200px;
+  --header-height: 72px;
+  --border-radius: 8px;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+/* Member Theme Variables (Optional, for Future) */
+:root[data-theme="member-1"] {
+  --accent: #FF0000;
+}
