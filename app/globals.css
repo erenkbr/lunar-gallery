@@ -9,12 +9,9 @@
   align-content: center;
 }
 
-html {
-  background: var(--surface);
-}
 
 /* Base Styles (Modern Lunar Background) */
-
+html,
 body {
   padding: var(--space-3);
   background: var(--surface);

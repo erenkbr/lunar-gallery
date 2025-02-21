@@ -1,4 +1,3 @@
-@import '../../variables.css';
 .filterContainer {
     background: var(--surface);
     gap: 2rem;
