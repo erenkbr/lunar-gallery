@@ -11,7 +11,7 @@ export const ARTMS_MEMBERS = [
     },
     {
       id: 'kimlip',
-      name: 'Kim Lip',
+      name: 'KimLip',
       imageUrl: 'https://static.cosmo.fans/images/artms/KimLip.jpg',
     },
     {

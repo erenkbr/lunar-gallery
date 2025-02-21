@@ -17,6 +17,12 @@
     gap: 1rem;
   }
   
+  .selected {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #333;
+  }
+  
   .groupTitle {
     font-family: var(--font-heading);
     font-size: 1.25rem;
