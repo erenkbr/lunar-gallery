@@ -1,4 +1,3 @@
-// app/api/catalog/route.js
 import { NextResponse } from 'next/server';
 import dbConnect from '@/app/lib/dbconnect';
 import Objekt from '@/app/models/Objekt';
@@ -10,10 +9,8 @@ export async function GET(request) {
     
     await dbConnect();
 
-    // If a member is provided, filter by that member; otherwise, return all objekts
     const filter = member ? { member } : {};
 
-    // Fetch all matching Objekt documents, sorted by createdAt (newest first)
     const objekts = await Objekt.find(filter).sort({ season: 1, collection: 1, member: 1 }).lean();
 
     return NextResponse.json({ objekts });
