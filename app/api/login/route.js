@@ -1,16 +1,22 @@
+// app/api/login/route.js
 import { NextResponse } from "next/server";
+import { z } from "zod";
 
-const COSMO_LOGIN_URL = `${process.env.COSMO_BASE_URL}/auth/v1/signin`;
+const loginSchema = z.object({
+  idToken: z.string().min(1, "ID token is required"),
+  email: z.string().email("Invalid email address"),
+});
 
 export async function POST(request) {
   try {
-    const { idToken, email } = await request.json();
-
-    if (!idToken || !email) {
-      return NextResponse.json({ error: "idToken and email are required" }, { status: 400 });
+    if (!process.env.COSMO_BASE_URL) {
+      return NextResponse.json({ error: "Missing COSMO_BASE_URL environment variable" }, { status: 500 });
     }
 
-    const cosmoResponse = await fetch(COSMO_LOGIN_URL, {
+    const body = await request.json();
+    const { idToken, email } = loginSchema.parse(body);
+
+    const response = await fetch(`${process.env.COSMO_BASE_URL}/auth/v1/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -20,14 +26,17 @@ export async function POST(request) {
       }),
     });
 
-    const cosmoData = await cosmoResponse.json();
-
-    if (!cosmoResponse.ok) {
-      throw new Error(cosmoData.error || "Failed to log into Cosmo");
+    if (!response.ok) {
+      const errorData = await response.json();
+      return NextResponse.json({ error: errorData.error || "Cosmo login service unavailable" }, { status: 503 });
     }
 
+    const cosmoData = await response.json();
     return NextResponse.json({ success: true, cosmoData });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: "Invalid request body", details: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Internal server error", details: error.message }, { status: 500 });
   }
 }

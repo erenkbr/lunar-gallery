@@ -1,0 +1,34 @@
+.card {
+    padding: var(--space-1);
+    transition: transform var(--transition-fast);
+    background: var(--surface);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .title {
+    margin-top: var(--space-2);
+    text-align: center;
+    color: var(--text-primary);
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card {
+      padding: var(--space-1);
+    }
+  
+    .image {
+      max-width: 100px;
+    }
+  }

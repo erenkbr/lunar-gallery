@@ -1,0 +1,23 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: var(--space-3);
+    justify-content: center;
+    background: var(--surface);
+  }
+  
+  .card {
+    padding: var(--space-3);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: var(--space-1);
+    }
+  
+    .card {
+      padding: var(--space-1);
+    }
+  }
