@@ -14,11 +14,12 @@ export default function Home() {
     if (!objekts) return null;
     return objekts.map((objekt) => {
       const cleanedName = objekt.name.split("#")[0].trim();
+      console.log(objekt)
       return (
         <Card
           key={objekt._id || objekt.tokenId}
           imageSrc={objekt.frontImage || "/placeholder.png"}
-          title={cleanedName}
+          title={objekt?.metadata?.title?.split("#")[0].trim() || cleanedName}
         />
       );
     });
@@ -44,7 +45,7 @@ export default function Home() {
         </Text>
       </div>
       {isLoading ? (
-        <LoadingState count={8} />
+        <LoadingState count={16} />
       ) : (
         <div className={styles.grid}>{objektCards}</div>
       )}
