@@ -1,21 +1,24 @@
-import { NextResponse } from 'next/server';
-import dbConnect from '@/app/lib/dbconnect';
-import Objekt from '@/app/models/Objekt';
+// app/lib/dbconnect.js
+import mongoose from 'mongoose';
 
-export async function GET(request) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const member = searchParams.get("member");
-    
-    await dbConnect();
-
-    const filter = member ? { member } : {};
-
-    const objekts = await Objekt.find(filter).sort({ season: 1, collection: 1, member: 1 }).lean();
-
-    return NextResponse.json({ objekts });
-  } catch (error) {
-    console.error('Error fetching catalog:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+  throw new Error('Please define the MONGO_URI environment variable in .env.local or Vercel settings');
 }
+
+let cached = global.mongoose;
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+async function dbConnect() {
+  if (cached.conn) return cached.conn;
+  if (!cached.promise) {
+    const opts = { bufferCommands: false };
+    cached.promise = mongoose.connect(MONGO_URI, opts).then(mongoose => mongoose);
+  }
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
+
+export default dbConnect;

@@ -1,0 +1,68 @@
+.skeleton {
+    background: var(--surface-alt);
+    position: relative;
+    overflow: hidden;
+    animation: pulse 1.5s infinite ease-in-out;
+    margin-bottom: var(--space-2);
+  }
+  
+  /* Variants */
+  .rect {
+    width: 100%;
+    height: 100px;
+    border-radius: var(--border-radius);
+  }
+  
+  .circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+  
+  .text {
+    width: 100%;
+    height: 16px;
+    border-radius: 4px;
+  }
+  
+  /* Animation */
+  @keyframes pulse {
+    0% { background-color: var(--surface-alt); }
+    50% { background-color: var(--black-80); }
+    100% { background-color: var(--surface-alt); }
+  }
+  
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(160, 160, 176, 0.1), transparent);
+    animation: shimmer 1.5s infinite linear;
+  }
+  
+  @keyframes shimmer {
+    100% { left: 100%; }
+  }
+  
+  /* Multiple skeletons */
+  .skeletonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  /* For text variant: Generate different widths */
+  .skeletonGroup .text:nth-child(odd) {
+    width: 80%;
+  }
+  
+  .skeletonGroup .text:nth-child(even) {
+    width: 90%;
+  }
+  
+  .skeletonGroup .text:last-child {
+    width: 60%;
+  }

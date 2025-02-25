@@ -8,6 +8,9 @@ const nextConfig = {
               pathname: '/**',
             },
           ],
+          
+          unoptimized: true, // Disables optimization, allows all external URLs
+           
       },
 };
 
