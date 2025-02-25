@@ -1,0 +1,119 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    border-radius: var(--border-radius);
+    font-family: var(--font-body);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+  }
+  
+  .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Variants */
+  .primary {
+    background-color: var(--cta-primary);
+    color: var(--text-primary);
+    border-color: var(--silver-primary);
+  }
+  
+  .primary:hover:not(:disabled) {
+    background-color: var(--cta-primary-hover);
+    border-color: var(--white-80);
+    box-shadow: 0 0 15px rgba(160, 160, 176, 0.4);
+  }
+  
+  .secondary {
+    background-color: var(--neutral-secondary);
+    color: var(--text-primary);
+    border-color: var(--silver-primary);
+  }
+  
+  .secondary:hover:not(:disabled) {
+    background-color: var(--neutral-secondary-hover);
+    box-shadow: 0 0 15px rgba(160, 160, 176, 0.4);
+  }
+  
+  .ghost {
+    background-color: transparent;
+    color: var(--text-primary);
+  }
+  
+  .ghost:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .transparent {
+    background-color: transparent;
+    color: var(--text-primary);
+  }
+  
+  /* No hover effect for transparent */
+  .transparent:hover:not(:disabled) {
+    background-color: transparent;
+  }
+  
+  /* Sizes */
+  .small {
+    height: 32px;
+    padding: 0 var(--space-2);
+    font-size: var(--text-sm);
+  }
+  
+  .medium {
+    height: 40px;
+    padding: 0 var(--space-3);
+    font-size: var(--text-base);
+  }
+  
+  .large {
+    height: 48px;
+    padding: 0 var(--space-4);
+    font-size: var(--text-lg);
+  }
+  
+  .fullWidth {
+    width: 100%;
+  }
+  
+  /* Icon styling */
+  .icon {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Loading spinner */
+  .loader {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--text-primary);
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .small {
+      height: 28px;
+    }
+    
+    .medium {
+      height: 36px;
+    }
+    
+    .large {
+      height: 44px;
+    }
+  }

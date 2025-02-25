@@ -1,0 +1,43 @@
+.filterContainer {
+    background: var(--surface);
+    padding-top: var(--space-6);
+  }
+  
+  .groupTabs {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  
+  .groupTab {
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+  
+  .groupTab:hover {
+    color: var(--cta-primary-hover);
+  }
+  
+  .memberList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: var(--space-1);
+    width: 100%;
+    max-height: 200px; /* Limit height for tripleS */
+    overflow-y: auto; /* Scrollable for many members */
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .filterContainer {
+      padding-top: var(--space-4);
+    }
+  
+    .groupTabs {
+      gap: var(--space-2);
+    }
+  
+    .memberList {
+      max-height: 150px;
+    }
+  }

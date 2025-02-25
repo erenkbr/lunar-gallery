@@ -1,0 +1,59 @@
+/* app/components/atoms/Avatar/Avatar.module.css */
+.avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform var(--transition-fast), border var(--transition-fast);
+    position: relative;
+  }
+  
+  .image {
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  /* Sizes */
+  .small {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .medium {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .large {
+    width: 64px;
+    height: 64px;
+  }
+  
+  /* States */
+  .selected {
+    border: 3px solid var(--cta-primary-hover);
+  }
+  
+  .clickable {
+    cursor: pointer;
+  }
+  
+  .clickable:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .small {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .medium {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .large {
+      width: 50px;
+      height: 50px;
+    }
+  }

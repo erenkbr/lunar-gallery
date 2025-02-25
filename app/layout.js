@@ -1,10 +1,8 @@
 "use client";
 
 import "./globals.css";
-import Navbar from "@/app/components/Navbar/Navbar";
+import Navbar from "@/app/components/organisms/Navbar/Navbar";
 import { Providers } from "./providers";
-import { MemberFilter } from "./components/MemberFilter/MemberFilter";
-
 export default function RootLayout({ children }) {
 
   return (
