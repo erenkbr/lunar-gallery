@@ -20,6 +20,6 @@ const objektSchema = new mongoose.Schema({
   metadata: { type: Map, of: mongoose.Schema.Types.Mixed }
 }, { timestamps: true });
 
-const Objekt = mongoose.models.Objekt || mongoose.model('Objekt', objektSchema);
-
-export default Objekt;
+export function getObjektModel(collectionName) {
+  return mongoose.models[collectionName] || mongoose.model(collectionName, objektSchema, collectionName);
+}

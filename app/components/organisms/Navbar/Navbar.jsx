@@ -2,16 +2,22 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CircleUserRound, Menu, X, LogIn } from "lucide-react";
 import { useAuth } from "@/app/hooks/useAuth";
+import { ModalContent } from "@/app/components/molecules/ModalContent/ModalContent";
+import { Text } from "@/app/components/atoms/Text/Text";
 
 export default function Navbar() {
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [emailAddress, setEmailAddress] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
+  const { sendMagicLink, isLoggedIn, logout, authData } = useAuth();
 
-  const { sendMagicLink, isLoggedIn, logout } = useAuth(emailAddress);
+  useEffect(() => {
+    setIsMounted(true); // Mark as hydrated
+  }, []);
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +32,9 @@ export default function Navbar() {
     }
   };
 
+  // Default to LogIn icon on server, update on client
+  const UserIcon = isMounted && isLoggedIn ? CircleUserRound : LogIn;
+
   return (
     <>
       <nav className={styles.navbar}>
@@ -33,35 +42,29 @@ export default function Navbar() {
           <Image src="/moon-logo.svg" alt="Lunar Gallery" width={80} height={80} />
           <span>lunar.gallery</span>
         </Link>
-
         <div className={styles.links}>
           <button
             className={styles.iconButton}
             onClick={() => {
-              if (isLoggedIn) {
+              if (isMounted && isLoggedIn) {
                 logout();
               } else {
                 setWalletModalOpen(true);
               }
             }}
           >
-            {isLoggedIn ? <CircleUserRound size={36} /> : <LogIn size={36} />}
+            <UserIcon size={36} />
           </button>
         </div>
-
-        <button
-          className={styles.menuButton}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
+        <button className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
-
         {menuOpen && (
           <div className={styles.mobileMenu}>
             <button
               className={styles.mobileConnectBtn}
               onClick={() => {
-                if (isLoggedIn) {
+                if (isMounted && isLoggedIn) {
                   logout();
                 } else {
                   setWalletModalOpen(true);
@@ -69,48 +72,30 @@ export default function Navbar() {
                 setMenuOpen(false);
               }}
             >
-              <Wallet size={20} />
+              <LogIn size={20} />
             </button>
           </div>
         )}
       </nav>
-
-      {walletModalOpen && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setWalletModalOpen(false)}
-        >
-          <div
-            className={styles.modal}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2>Welcome to lunar.gallery</h2>
-            <p className={styles.welcomeText}>Enter your Cosmo email to start exploring.</p>
-            <form onSubmit={handleEmailSubmit}>
-              <input
-                type="email"
-                placeholder="cosmo@example.com"
-                value={emailAddress}
-                onChange={(e) => setEmailAddress(e.target.value)}
-                className={styles.input}
-                autoFocus
-              />
-                          <div className={styles.modalButtons}>
-            <button
-                type="submit"
-                className={styles.submitBtn}
-              >
-                Submit
-              </button>
-              <button
-                onClick={() => setWalletModalOpen(false)}
-                className={styles.closeBtn}
-              >
-                Cancel
-              </button>
-            </div>
-            </form>
+      {isMounted && walletModalOpen && (
+        <div className={styles.modalOverlay} onClick={() => setWalletModalOpen(false)}>
+          <div onClick={(e) => e.stopPropagation()}>
+            <ModalContent
+              title="Welcome to lunar.gallery"
+              description="Enter your Cosmo email to start exploring."
+              inputValue={emailAddress}
+              onInputChange={(e) => setEmailAddress(e.target.value)}
+              onSubmit={handleEmailSubmit}
+              onCancel={() => setWalletModalOpen(false)}
+            />
           </div>
+        </div>
+      )}
+      {isMounted && authData?.error && (
+        <div className={styles.error}>
+          <Text variant="body" color="secondary">
+            {authData.error}
+          </Text>
         </div>
       )}
     </>

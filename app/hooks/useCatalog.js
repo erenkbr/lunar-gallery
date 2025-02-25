@@ -1,22 +1,25 @@
-import { useQuery } from '@tanstack/react-query'
-import { useObjektsStore } from '@/app/store/slices/objektSlice'  // adjust path as needed
+import { useQuery } from '@tanstack/react-query';
+import { useObjektsStore } from '@/app/store/slices/objektSlice';
 
 export function useCatalog() {
-  const { selectedFilter } = useObjektsStore();
-  
+  const { selectedGroup, selectedFilter } = useObjektsStore();
+
   const query = useQuery({
-    queryKey: ['catalog', selectedFilter],
+    queryKey: ['catalog', selectedGroup, selectedFilter],
     queryFn: async () => {
-      const queryString =
-        selectedFilter && selectedFilter !== 'artist'
-          ? `?member=${selectedFilter}`
-          : '';
-      
+      let queryString = `?group=${selectedGroup}`;
+      if (selectedFilter) {
+        queryString += `&member=${selectedFilter}`;
+      }
+
       const response = await fetch(`/api/catalog${queryString}`);
-      if (!response.ok) throw new Error('Failed to fetch Objekt catalog');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch catalog: ${response.statusText}`);
+      }
       const data = await response.json();
       return data.objekts;
     },
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   return query;
