@@ -18,13 +18,83 @@
     color: var(--cta-primary-hover);
   }
   
+  .filterSection {
+    margin-bottom: var(--space-4);
+  }
+  
+  .sectionTitle {
+    margin-bottom: var(--space-2);
+    color: var(--text-primary);
+  }
+  
   .memberList {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: var(--space-1);
     width: 100%;
-    max-height: 200px; /* Limit height for tripleS */
-    overflow-y: auto; /* Scrollable for many members */
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .dropdownContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+  
+  .dropdownWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-1);
+  }
+  
+  /* Updated dropdown styles */
+  .dropdown {
+    background: var(--black-80); /* Dark background */
+    color: var(--text-primary); /* Light text */
+    border: 1px solid var(--black-70); /* Subtle border */
+    border-radius: var(--border-radius); /* Rounded corners */
+    padding: var(--space-2); /* Consistent padding */
+    font-family: var(--font-body); /* App font */
+    font-size: var(--text-base); /* Standard text size */
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast); /* Smooth transitions */
+    cursor: pointer;
+    appearance: none; /* Remove default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="%23EEEEEE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></path></svg>'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right var(--space-2) center;
+    background-size: 10px;
+  }
+  
+  .dropdown:hover {
+    border-color: var(--cta-primary-hover); /* Highlight on hover */
+  }
+  
+  .dropdown:focus {
+    border-color: var(--cta-primary); /* Active state */
+    box-shadow: 0 0 0 2px rgba(30, 78, 121, 0.2); /* Subtle glow with your blue */
+    outline: none;
+  }
+  
+  .dropdown option {
+    background: var(--black-80); /* Dark option background */
+    color: var(--text-primary); /* Light text */
+  }
+  
+  /* Rest of your existing styles */
+  .error {
+    padding: var(--space-3);
+    text-align: center;
+    color: var(--text-secondary);
   }
   
   /* Responsive */
@@ -39,5 +109,10 @@
   
     .memberList {
       max-height: 150px;
+    }
+  
+    .dropdownContainer {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
     }
   }

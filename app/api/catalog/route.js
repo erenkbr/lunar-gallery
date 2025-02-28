@@ -19,22 +19,35 @@ const TRIPLES_MEMBER_CODES = {
   "ChaeWon": "S21", "Sullin": "S22", "SeoAh": "S23", "JiYeon": "S24"
 };
 
+// Define schemas for query parameters
 const memberSchema = z.string().regex(/^[a-zA-Z]+$/, "Member must be alphanumeric").optional().nullable().transform((val) => val || undefined);
 const groupSchema = z.string().optional().nullable().transform((val) => val || "ARTMS").refine((val) => ["ARTMS", "tripleS"].includes(val), { message: "Only ARTMS or tripleS supported" });
+const seasonSchema = z.string().optional().nullable().transform((val) => val || undefined);
+const collectionSchema = z.string().optional().nullable().transform((val) => val || undefined);
+const classSchema = z.string().optional().nullable().transform((val) => val || undefined);
 
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const memberResult = memberSchema.safeParse(searchParams.get("member"));
     const groupResult = groupSchema.safeParse(searchParams.get("group"));
+    const seasonResult = seasonSchema.safeParse(searchParams.get("season"));
+    const collectionResult = collectionSchema.safeParse(searchParams.get("collection"));
+    const classResult = classSchema.safeParse(searchParams.get("class"));
 
     if (!memberResult.success) return NextResponse.json({ error: "Invalid member", details: memberResult.error.message }, { status: 400 });
     if (!groupResult.success) return NextResponse.json({ error: "Invalid group", details: groupResult.error.message }, { status: 400 });
+    if (!seasonResult.success) return NextResponse.json({ error: "Invalid season", details: seasonResult.error.message }, { status: 400 });
+    if (!collectionResult.success) return NextResponse.json({ error: "Invalid collection", details: collectionResult.error.message }, { status: 400 });
+    if (!classResult.success) return NextResponse.json({ error: "Invalid class", details: classResult.error.message }, { status: 400 });
 
     const member = memberResult.data;
     const group = groupResult.data;
+    const season = seasonResult.data;
+    const collection = collectionResult.data;
+    const classType = classResult.data;
 
-    console.log(`Requested group: ${group}, member: ${member || 'all'}`);
+    console.log(`Requested group: ${group}, member: ${member || 'all'}, season: ${season || 'all'}, collection: ${collection || 'all'}, class: ${classType || 'all'}`);
 
     await dbConnect();
 
@@ -43,15 +56,32 @@ export async function GET(request) {
     const ObjektModel = getObjektModel(collectionName);
 
     let filter = {};
+
+    // Member filter
     if (member) {
       if ((group === "ARTMS" && !ARTMS_MEMBERS.includes(member)) || 
           (group === "tripleS" && !TRIPLES_MEMBERS.includes(member))) {
         return NextResponse.json({ error: `Member ${member} not found in ${group}` }, { status: 400 });
       }
-      filter = { member: group === "tripleS" ? TRIPLES_MEMBER_CODES[member] : member };
+      filter.member = group === "tripleS" ? TRIPLES_MEMBER_CODES[member] : member;
     } else {
       const members = group === "ARTMS" ? ARTMS_MEMBERS : Object.values(TRIPLES_MEMBER_CODES);
-      filter = { member: { $in: members } };
+      filter.member = { $in: members };
+    }
+
+    // Season filter
+    if (season) {
+      filter.season = season;
+    }
+
+    // Collection filter
+    if (collection) {
+      filter.collection = collection;
+    }
+
+    // Class filter
+    if (classType) {
+      filter['metadata.metadata.objekt.class'] = classType;
     }
 
     console.log(`Querying ${collectionName} with filter:`, filter);
