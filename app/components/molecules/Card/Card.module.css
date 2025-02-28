@@ -4,6 +4,9 @@
     background: var(--surface);
     border-radius: var(--border-radius);
     overflow: hidden;
+    width: 210px;
+    margin: 0 auto;
+    cursor: pointer; /* Indicate clickability */
   }
   
   .image {
@@ -26,6 +29,7 @@
   @media (max-width: 768px) {
     .card {
       padding: var(--space-1);
+      width: 100px;
     }
   
     .image {
