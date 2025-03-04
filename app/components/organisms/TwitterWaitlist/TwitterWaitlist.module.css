@@ -1,0 +1,203 @@
+.waitlistContainer {
+    padding: var(--space-6);
+    background-color: var(--black-90);
+    background-color: rgba(31, 31, 47, 0.7);
+    /* Using your --black-90 with opacity */
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    color: var(--text-primary);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    backdrop-filter: blur(8px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: var(--space-4);
+}
+
+.title {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    color: var(--text-primary);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-1);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.optional {
+    color: var(--text-secondary);
+}
+
+.required {
+    color: var(--cta-primary);
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.twitterPrefix {
+    position: absolute;
+    left: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.input {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--black-80);
+    border: 1px solid var(--black-70);
+    border-radius: var(--border-radius);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--cta-primary);
+    box-shadow: 0 0 0 2px rgba(30, 78, 121, 0.2);
+}
+
+.twitterInput {
+    padding-left: var(--space-6);
+}
+
+.errorText {
+    color: #ff4d4f;
+    font-size: var(--text-sm);
+    margin-top: var(--space-1);
+}
+
+.submitButton {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--cta-primary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: var(--cta-primary-hover);
+}
+
+.submitButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.footnote {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: var(--space-3);
+}
+
+/* Success State */
+.successContainer {
+    text-align: center;
+    padding: var(--space-4) 0;
+}
+
+.checkmark {
+    margin: 0 auto;
+    height: 48px;
+    width: 48px;
+    color: #52c41a;
+}
+
+.successTitle {
+    margin-top: var(--space-2);
+    font-size: var(--text-xl);
+    font-weight: 500;
+}
+
+.successText {
+    margin-top: var(--space-1);
+    color: var(--text-secondary);
+}
+
+.positionDisplay {
+    background-color: var(--black-80);
+    border-radius: var(--border-radius);
+    padding: var(--space-4);
+    margin: var(--space-4) auto;
+    display: inline-block;
+}
+
+.positionNumber {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+}
+
+.positionLabel {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+}
+
+.shareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--space-4) auto 0;
+    padding: var(--space-2) var(--space-4);
+    background-color: #1DA1F2;
+    /* Twitter blue */
+    color: white;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.shareButton:hover {
+    background-color: #0c85d0;
+    /* Darker Twitter blue */
+}
+
+.shareIcon {
+    margin-right: var(--space-2);
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+    .waitlistContainer {
+        padding: var(--space-4);
+    }
+
+    .title {
+        font-size: var(--text-xl);
+    }
+}
